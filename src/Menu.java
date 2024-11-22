@@ -11,6 +11,21 @@ public class Menu {
         category_i=new HashMap<>();
         price_i=new TreeMap<>();
     }
+    public void pre_feed()
+    {
+//        Item i1=new Item("x",10,"drinks",true);
+//        Item i2=new Item("y",15,"meals",true);
+//        Item i3=new Item("z",20,"snacks",true);
+//        i.add(i1);
+//        i.add(i2);
+//        i.add(i3);
+//        category_i.put(i1.category,new ArrayList<>());
+//        category_i.put(i2.category,new ArrayList<>());
+//        category_i.put(i3.category,new ArrayList<>());
+        set_item_menu("x",10,"drinks",true);
+        set_item_menu("y",15,"meals",true);
+        set_item_menu("z",20,"snacks",true);
+    }
     public void update_item(String name,int price,boolean avail)
     {
         for(Item x: i)

@@ -106,10 +106,15 @@ public class Customer {
                     } else if (in_ch == 3) {
                         System.out.println("Enter name of Item To remove");
                         String n = sc.next();
-                        for (Map.Entry<Item, Integer> entry : cart.entrySet()) {
+                        Iterator<Map.Entry<Item, Integer>> iterator = cart.entrySet().iterator();
+
+                        while (iterator.hasNext()) {
+                            Map.Entry<Item, Integer> entry = iterator.next();
                             Item item = entry.getKey();
-                            if (n.equals(item.name))
-                                cart.remove(item);
+                            if (n.equals(item.name)) {
+                                iterator.remove(); // Safely remove the item during iteration
+                                System.out.println(item.name + " removed from cart.");
+                            }
                         }
                     } else if (in_ch == 4) {
                         for (Map.Entry<Item, Integer> entry : cart.entrySet()) {
@@ -120,11 +125,13 @@ public class Customer {
                     } else if (in_ch == 5) {
                         System.out.println("VIP Order?(Enter 1.VIP or 0.Regular)");
                         int type = sc.nextInt();
+                        sc.nextLine();
                         System.out.println("Special Request if any: ");
                         String req = sc.nextLine();
                         this.type = type;
                         int amount = amt(cart, this.type);
-                        Order o = new Order(count++, cart, type, req, amount);
+                        Order o = new Order(++count, cart, type, req, amount);
+                        o.set_status("pending");
                         OrderList.addOrder(o);
                         orderHistory.add(o);
                     }
@@ -150,7 +157,7 @@ public class Customer {
                         int o_no = sc.nextInt();
                         for (Order o : orderHistory) {
                             if (o_no == o.order_no) {
-                                o.status = "Cancel";
+                                o.set_status("Cancelled");
                                 OrderList.orders.remove(o);
                             }
                         }

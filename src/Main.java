@@ -12,6 +12,7 @@ public class Main
         Scanner sc = new Scanner(System.in);
         Menu m =new Menu();
         Admin a=new Admin();
+        m.pre_feed();
         while(true)
         {
             System.out.println("1. Admin ");
